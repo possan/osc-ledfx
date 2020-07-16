@@ -1,4 +1,6 @@
 #include "fx.h"
+#include <stdio.h>
+#include <string.h>
 
 uint8_t brightness_at_position(FxLayerSettings *layer, float time, int led, int num_leds, uint8_t *temp) {
     uint32_t ramp_i =
