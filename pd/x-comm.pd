@@ -1,0 +1,28 @@
+#N canvas 331 0 568 690 10;
+#X obj 32 23 r osc;
+#X obj 29 149 list prepend send;
+#X obj 30 177 list trim;
+#X obj 193 87 oscparse;
+#X obj 193 112 print parse-output;
+#X obj 48 88 print osc-packet;
+#X msg 68 378 connect localhost 8000;
+#X msg 30 440 connect localhost 9000;
+#X obj 31 468 netsend -u -b;
+#X obj 59 408 netsend -u -b;
+#X obj 114 317 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 65 208 loadbang;
+#X text 137 317 RECONNECT;
+#X connect 0 0 1 0;
+#X connect 0 0 5 0;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 9 0;
+#X connect 2 0 8 0;
+#X connect 3 0 4 0;
+#X connect 6 0 9 0;
+#X connect 7 0 8 0;
+#X connect 10 0 6 0;
+#X connect 10 0 7 0;
+#X connect 11 0 10 0;
+#X coords 0 -1 1 1 150 50 1 100 300;
