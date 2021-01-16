@@ -1,0 +1,88 @@
+<html>
+    <body>
+        <script src="jsbinding.js" type="text/javascript"></script>
+        <script>
+            const GLOB_NUM_LEDS = 1
+            const GLOB_PIXELORDER = 2
+            const GLOB_NUDGE = 3
+            const GLOB_OPACITY = 4
+            const GLOB_BASE_SPEED = 5
+            const LAYER1_OFFSET = 0
+            const LAYER2_OFFSET = 50
+            const LAYER3_OFFSET = 100
+            const LAYER4_OFFSET = 150
+            const LAYER_OPACITY = 10
+            const LAYER_OFFSET = 11
+            const LAYER_SIZE = 12
+            const LAYER_REPEAT = 13
+            const LAYER_FEATHER_LEFT = 14
+            const LAYER_FEATHER_RIGHT = 15
+            const LAYER_SPEED_MULTIPLIER = 16
+            const LAYER_BLEND = 17
+            const LAYER_COLOR_R = 20
+            const LAYER_COLOR_G = 21
+            const LAYER_COLOR_B = 22
+            const LAYER_COLORSPACE = 23
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    console.log('Module', Module)
+
+                    var fx_binding_reset = Module.cwrap('fx_binding_reset', 'void', []);
+                    var fx_binding_set_property = Module.cwrap('fx_binding_set_property', 'void', ['number', 'number']);
+                    var fx_binding_load_animation = Module.cwrap('fx_binding_load_animation', 'void', ['number', 'number']);
+                    var fx_binding_render = Module.cwrap('fx_binding_render', 'void', ['number', 'number', 'number', 'number']);
+
+                    var ledBuf = Module._malloc(100000);
+
+                    fx_binding_reset()
+                    console.log('resetted.')
+
+                    fx_binding_set_property(GLOB_NUM_LEDS, 20);
+                    fx_binding_set_property(GLOB_PIXELORDER, 0);
+                    fx_binding_set_property(GLOB_OPACITY, 100);
+                    fx_binding_set_property(GLOB_BASE_SPEED, 1000);
+
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_OPACITY, 100);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_OFFSET, 0);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_COLOR_R, 350);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_COLOR_G, 100);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_COLOR_B, 100);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_COLORSPACE, 1);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_SIZE, 20);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_REPEAT, 1);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_FEATHER_LEFT, 20);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_FEATHER_RIGHT, 20);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_SPEED_MULTIPLIER, 3000);
+                    fx_binding_set_property(LAYER1_OFFSET + LAYER_BLEND, 0);
+
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_OPACITY, 0);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_OFFSET, 0);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_COLOR_R, 255);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_COLOR_G, 0);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_COLOR_B, 100);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_COLORSPACE, 1);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_SIZE, 30);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_REPEAT, 4);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_FEATHER_LEFT, 10);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_FEATHER_RIGHT, 10);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_SPEED_MULTIPLIER, -2000);
+                    fx_binding_set_property(LAYER2_OFFSET + LAYER_BLEND, 1);
+
+                    fx_binding_render(1000, ledBuf, 20)
+                    ledBufData = Module.HEAPU8.subarray(ledBuf, ledBuf + 3*20)
+                    console.log(ledBuf, ledBufData)
+
+                    fx_binding_render(2000, ledBuf, 20)
+                    ledBufData = Module.HEAPU8.subarray(ledBuf, ledBuf + 3*20)
+                    console.log(ledBuf, ledBufData)
+
+                    fx_binding_render(3000, ledBuf, 20)
+                    ledBufData = Module.HEAPU8.subarray(ledBuf, ledBuf + 3*20)
+                    console.log(ledBuf, ledBufData)
+                }, 2000)
+            })
+
+        </script>
+    </body>
+</html>

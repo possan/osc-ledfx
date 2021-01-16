@@ -1,7 +1,7 @@
-#N canvas 106 256 1306 529 10;
-#X obj 18 327 x-comm;
-#X obj 16 15 x-glob;
-#X obj 268 15 x-layer 1;
-#X obj 520 15 x-layer 2;
-#X obj 772 15 x-layer 3;
-#X obj 1024 15 x-layer 4;
+#N canvas 157 17 998 1011 10;
+#X obj 2 437 x-comm;
+#X obj 2 1 x-glob;
+#X obj 254 1 x-layer 1;
+#X obj 608 1 x-layer 2;
+#X obj 254 504 x-layer 3;
+#X obj 608 504 x-layer 4;

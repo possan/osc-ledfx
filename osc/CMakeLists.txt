@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 3.9)
 
+add_definitions(-DWITH_OSC)
+
 add_executable (osctest
     main.c
     tinyosc.c

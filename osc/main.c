@@ -103,12 +103,12 @@ int main() {
   fx.layer[0].offset = 0;
   fx.layer[0].opacity = 100;
   fx.layer[0].color[0] = 255;
-  fx.layer[0].radius = 3;
+  // fx.layer[0].radius = 3;
   fx.layer[0].repeat = 1;
   fx.layer[0].feather_left = 3;
   fx.layer[0].feather_right = 10;
   fx.layer[0].opacity = 100;
-  fx.layer[0].speed = 1000;
+  // fx.layer[0].speed = 1000;
 
   // fx.layer[1].offset = 33;
   // fx.layer[1].opacity = 33;
