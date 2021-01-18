@@ -14,6 +14,7 @@
 #define BUFFERSIZE 2000
 
 uint32_t lastResetTime = 0;
+uint32_t lastFrameTime = 0;
 FxSettings fx;
 uint8_t rgb[1000 * 3];
 uint8_t temp[1000];
@@ -29,7 +30,9 @@ uint32_t millis() {
 void render() {
   char bri[6] = { " .+:#@"};
   uint32_t T = millis() - lastResetTime;
-  fx_render(&fx, T, &rgb, 1000, &temp);
+  uint32_t dT = T - lastFrameTime;
+  lastFrameTime = T;
+  fx_renderer_render(&fx, T, &rgb, 1000, &temp, dT);
 
   printf("FRAME: ");
   for(int j=0; j<fx.num_leds; j++) {
@@ -147,6 +150,7 @@ int main() {
   printf("Starting to listen to port %d\n", PORT);
 
   lastResetTime = millis();
+  fx_renderer_reset(&fx);
 
   memset(buffer, 0, BUFFERSIZE);
   while (1) {

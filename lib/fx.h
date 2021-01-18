@@ -27,7 +27,6 @@ extern "C" {
 #define LAYER_FEATHER_RIGHT 15
 #define LAYER_SPEED_MULTIPLIER 16
 #define LAYER_BLEND 17
-
 #define LAYER_COLOR_R 20
 #define LAYER_COLOR_G 21
 #define LAYER_COLOR_B 22
@@ -47,9 +46,9 @@ typedef struct FxLayerSettings {
     int32_t feather_left; // width in percent
     int32_t feather_right; // width in percent
     int32_t speed_multiplier; // base speed multiplier * 1000
-    int32_t repeat; // repeats, absolute value, 1-10
-    int32_t gamma; // in percent 0-200
+    int32_t repeat; // repeats, absolute value * 1000, 1-10
     int32_t blend; // 0 = add, 1 = subtract
+    int32_t _local_time;
 } FxLayerSettings;
 
 typedef struct FxSettings {
@@ -59,19 +58,22 @@ typedef struct FxSettings {
     int32_t pixel_order; // indexed, 0-5
     int32_t base_speed; // rpm * 1000
     int32_t test_pattern; // indexed, 0-1
+    int32_t _last_time;
+    int32_t _global_time;
     FxLayerSettings layer[4];
 } FxSettings;
 
-void fx_render(FxSettings *fx, uint32_t time, uint8_t *rgb, int max_leds, uint8_t *temp);
+void fx_renderer_reset(FxSettings *fx);
+void fx_renderer_render(FxSettings *fx, uint32_t time, uint8_t *rgb, int max_leds, uint8_t *temp, uint32_t deltatime);
 
 #ifdef WITH_OSC
-bool fx_set_osc_property(FxSettings *fx, char *property, uint32_t value);
+bool fx_set_osc_property(FxSettings *fx, char *property, int32_t value);
 #endif
 #ifdef WITH_JSON
 void fx_get_config_json(FxSettings *fx, char *destination, uint32_t maxsize);
 #endif
 #ifdef WITH_PROPS
-bool fx_set_id_property(FxSettings *fx, uint8_t property, uint32_t value);
+bool fx_set_id_property(FxSettings *fx, uint8_t property, int32_t value);
 #endif
 #ifdef	__cplusplus
 }

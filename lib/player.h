@@ -11,7 +11,7 @@ extern "C" {
 
 typedef struct {
     uint32_t time; // time offset in milliseconds
-    uint32_t newvalue; // number of leds
+    int32_t newvalue; // number of leds
     uint8_t property;
     uint8_t flags;
     uint8_t dummy1;
@@ -32,9 +32,13 @@ void fx_player_free(FxPlayer *fx);
 void fx_player_clear_animation(FxPlayer *fx);
 bool fx_player_load_frame(FxPlayer *fx, uint8_t *data, uint32_t length);
 bool fx_player_load_animation(FxPlayer *fx, uint8_t *data, uint32_t length);
-bool fx_player_add_keyframe(FxPlayer *player, uint32_t time, uint8_t prop, uint32_t value, uint8_t flags);
+bool fx_player_add_keyframe(FxPlayer *player, uint32_t time, uint8_t prop, int32_t value, uint8_t flags);
 
 void fx_player_prepare_frame(FxPlayer *fx, uint32_t time, FxSettings *target);
+
+void _fx_player_find_keyframes(FxPlayer *player, uint32_t time, uint32_t seekOrigin, uint8_t prop, FxKeyframe **left, FxKeyframe **right);
+void _fx_player_find_and_handle_keyframes(FxPlayer *player, uint32_t time, uint32_t seekOrigin, uint8_t prop, FxSettings *fx);
+uint32_t _fx_player_find_seek_origin(FxPlayer *player, uint32_t time);
 
 #ifdef	__cplusplus
 }
