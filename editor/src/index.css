@@ -1,0 +1,28 @@
+body {
+    background-color: #181818;
+    color: #fff;
+}
+
+#filemenu {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#filemenu button {
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #666;
+    color: #fff;
+    border: 0;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    white-space: pre-wrap;
+    font-size: 8pt;
+    background-color: #222;
+    color: #aaa;
+    border: 0;
+}
